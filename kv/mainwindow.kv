@@ -11,7 +11,7 @@
     size_hint_x: None
     size_hint_y: None
     width: 300
-    drag_rectangle: self.x, self.height - 30, self.width, 30
+    drag_rectangle: self.x, self.y + self.height - 30, self.width, 30
     drag_timeout: 10000000
     drag_distance: 0
     canvas.before:
@@ -23,7 +23,8 @@
     MDLabel:
         id: titlebar
         text: "Name"
-        adaptive_size: True
+        size_hint_y: None
+        height: 30
     WidgetSlider
 
 <ButtonWidget>:
@@ -58,3 +59,4 @@
                 size: self.size
                 pos: self.pos
         text: "val"
+        size_hint_x: 0.1

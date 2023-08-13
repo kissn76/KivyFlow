@@ -2,7 +2,7 @@
 
 <MainWindow>:
     WidgetContainer:
-        pos: (200, 0)
+        pos: (200, 100)
     WidgetContainer:
         pos: (0, 0)
 
@@ -10,6 +10,7 @@
     orientation: "vertical"
     size_hint_x: None
     size_hint_y: None
+    width: 300
     drag_rectangle: self.x, self.height - 30, self.width, 30
     drag_timeout: 10000000
     drag_distance: 0
@@ -39,11 +40,21 @@
 
 <WidgetSlider>:
     orientation: "horizontal"
-    MDLabel:
-        text: "val"
     MDSlider:
+        canvas.before:
+            Color:
+                rgba: 0, 0, 1, 1
+            Rectangle:
+                size: self.size
+                pos: self.pos
         min: 0
         max: 100
         value: 40
     MDLabel:
+        canvas.before:
+            Color:
+                rgba: 1, 0, 0, 1
+            Rectangle:
+                size: self.size
+                pos: self.pos
         text: "val"

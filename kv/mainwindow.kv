@@ -1,0 +1,49 @@
+#:kivy 2.2.1
+
+<MainWindow>:
+    WidgetContainer:
+        pos: (200, 0)
+    WidgetContainer:
+        pos: (0, 0)
+
+<WidgetContainer>:
+    orientation: "vertical"
+    size_hint_x: None
+    size_hint_y: None
+    drag_rectangle: self.x, self.height - 30, self.width, 30
+    drag_timeout: 10000000
+    drag_distance: 0
+    canvas.before:
+        Color:
+            rgba: 0, 1, 0, 0.5
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    MDLabel:
+        id: titlebar
+        text: "Name"
+        adaptive_size: True
+    WidgetSlider
+
+<ButtonWidget>:
+    orientation: "horizontal"
+    adaptive_size: True
+    MDLabel:
+        text: "val"
+        adaptive_size: True
+    MDRaisedButton:
+        text: "Click"
+    MDLabel:
+        text: "val"
+        adaptive_size: True
+
+<WidgetSlider>:
+    orientation: "horizontal"
+    MDLabel:
+        text: "val"
+    MDSlider:
+        min: 0
+        max: 100
+        value: 40
+    MDLabel:
+        text: "val"

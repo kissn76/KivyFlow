@@ -68,6 +68,9 @@
         Rectangle:
             size: self.size
             pos: self.pos
+    MDIconButton:
+        icon: "cogs"
+        on_release: root.show_alert_dialog()
     MDLabel:
         text: root.text
     MDIcon:

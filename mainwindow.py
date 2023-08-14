@@ -4,6 +4,8 @@ from kivymd.uix.behaviors import HoverBehavior
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.floatlayout import MDFloatLayout
 from kivymd.uix.label import MDLabel, MDIcon
+from kivymd.uix.dialog import MDDialog
+from kivymd.uix.button import MDFlatButton
 from kivy.lang import Builder
 
 
@@ -83,7 +85,22 @@ class WidgetResizer(HoverBehavior, MDLabel):
 
 
 class WidgetOutput(MDBoxLayout):
-    pass
+    dialog = None
+
+    def show_alert_dialog(self):
+        if not self.dialog:
+            self.dialog = MDDialog(
+                text="Discard draft?",
+                buttons=[
+                    MDFlatButton(
+                        text="CANCEL",
+                    ),
+                    MDFlatButton(
+                        text="DISCARD",
+                    ),
+                ],
+            )
+        self.dialog.open()
 
 
 class SliderWidget(MDBoxLayout):

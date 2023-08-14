@@ -5,43 +5,68 @@
         pos: (200, 100)
     WidgetContainer:
         pos: (0, 0)
+    WidgetContainer:
+        pos: (300, 200)
 
 <WidgetContainer>:
     orientation: "vertical"
     size_hint_x: None
     size_hint_y: None
     width: 300
-    drag_rectangle: self.x, self.y + self.height - 30, self.width, 30
+    drag_rectangle: self.x, self.y + self.height - self.titlebar_height, self.width - root.resize_border_width - root.middlewidget_width, self.titlebar_height
     drag_timeout: 10000000
     drag_distance: 0
+    MDBoxLayout:
+        orientation: "horizontal"
+        size_hint_y: None
+        height: root.titlebar_height
+        WidgetMover:
+            id: titlebar
+            height: root.titlebar_height
+        Widget:
+            size_hint_x: None
+            width: root.middlewidget_width
+            canvas.before:
+                Color:
+                    rgba: 0, 1, 0, 0.5
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+        WidgetResizer:
+            id: resizer
+            width: root.resize_border_width
+            height: root.titlebar_height
+    SliderWidget
+
+<WidgetMover>:
+    text: "Name"
+    size_hint_y: None
     canvas.before:
         Color:
             rgba: 0, 1, 0, 0.5
         Rectangle:
             size: self.size
             pos: self.pos
-    MDLabel:
-        id: titlebar
-        text: "Name"
-        size_hint_y: None
-        height: 30
-    WidgetSlider
 
-<ButtonWidget>:
-    orientation: "horizontal"
-    adaptive_size: True
-    MDLabel:
-        text: "val"
-        adaptive_size: True
-    MDRaisedButton:
-        text: "Click"
-    MDLabel:
-        text: "val"
-        adaptive_size: True
+<WidgetResizer>:
+    text: ""
+    size_hint_y: None
+    size_hint_x: None
+    canvas.before:
+        Color:
+            rgba: 0, 0, 0, 0.5
+        Rectangle:
+            size: self.size
+            pos: self.pos
 
-<WidgetSlider>:
+<WidgetOutput>:
+    icon: "rhombus-medium"
+    pos_hint: {"center_x": .5, "center_y": .5}
+
+<SliderWidget>:
     orientation: "horizontal"
     MDSlider:
+        id: slider
         canvas.before:
             Color:
                 rgba: 0, 0, 1, 1
@@ -50,13 +75,19 @@
                 pos: self.pos
         min: 0
         max: 100
-        value: 40
-    MDLabel:
+        step: 0.1
+        on_value: value.text = str(self.value)
+        hint: False
+    MDBoxLayout:
+        orientation: "horizontal"
+        size_hint_x: 0.2
         canvas.before:
             Color:
                 rgba: 1, 0, 0, 1
             Rectangle:
                 size: self.size
                 pos: self.pos
-        text: "val"
-        size_hint_x: 0.1
+        MDLabel:
+            id: value
+            text: str(slider.value)
+        WidgetOutput

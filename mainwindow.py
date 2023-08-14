@@ -82,7 +82,7 @@ class WidgetResizer(HoverBehavior, MDLabel):
         Window.set_system_cursor('arrow')
 
 
-class WidgetOutput(MDIcon):
+class WidgetOutput(MDBoxLayout):
     pass
 
 

@@ -60,8 +60,19 @@
             pos: self.pos
 
 <WidgetOutput>:
-    icon: "rhombus-medium"
-    pos_hint: {"center_x": .5, "center_y": .5}
+    orientation: "horizontal"
+    text: ""
+    canvas.before:
+        Color:
+            rgba: 1, 0, 0, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    MDLabel:
+        text: root.text
+    MDIcon:
+        icon: "rhombus-medium"
+        pos_hint: {"center_x": .5, "center_y": .5}
 
 <SliderWidget>:
     orientation: "horizontal"
@@ -78,16 +89,5 @@
         step: 0.1
         on_value: value.text = str(self.value)
         hint: False
-    MDBoxLayout:
-        orientation: "horizontal"
-        size_hint_x: 0.2
-        canvas.before:
-            Color:
-                rgba: 1, 0, 0, 1
-            Rectangle:
-                size: self.size
-                pos: self.pos
-        MDLabel:
-            id: value
-            text: str(slider.value)
-        WidgetOutput
+    WidgetOutput
+        id: value

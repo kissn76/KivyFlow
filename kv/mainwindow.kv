@@ -62,15 +62,13 @@
 <WidgetOutput>:
     orientation: "horizontal"
     text: ""
+    dialog: None
     canvas.before:
         Color:
             rgba: 1, 0, 0, 1
         Rectangle:
             size: self.size
             pos: self.pos
-    MDIconButton:
-        icon: "cogs"
-        on_release: root.show_alert_dialog()
     MDLabel:
         text: root.text
     MDIcon:
@@ -92,5 +90,24 @@
         step: 0.1
         on_value: value.text = str(self.value)
         hint: False
+    MDIconButton:
+        icon: "cogs"
+        on_release: root.show_alert_dialog()
     WidgetOutput
         id: value
+
+<SliderConfig>:
+    orientation: "vertical"
+    size_hint_y: None
+
+    MDTextField:
+        id: min_value
+        hint_text: "Minimum value"
+
+    MDTextField:
+        id: max_value
+        hint_text: "Maximum value"
+
+    MDTextField:
+        id: step_value
+        hint_text: "Step"

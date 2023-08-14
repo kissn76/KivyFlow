@@ -6,6 +6,7 @@ from kivymd.uix.floatlayout import MDFloatLayout
 from kivymd.uix.label import MDLabel, MDIcon
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.button import MDFlatButton
+from kivymd.uix.scrollview import MDScrollView
 from kivy.lang import Builder
 
 
@@ -85,23 +86,43 @@ class WidgetResizer(HoverBehavior, MDLabel):
 
 
 class WidgetOutput(MDBoxLayout):
+    pass
+
+
+class SliderWidget(MDBoxLayout):
     dialog = None
 
     def show_alert_dialog(self):
+
+        def close_dialog(obj):
+            self.dialog.dismiss()
+
+        def use_input(obj):
+            self.ids.slider.min = float(self.dialog.content_cls.ids.min_value.text)
+            self.ids.slider.max = float(self.dialog.content_cls.ids.max_value.text)
+            self.ids.slider.step = float(self.dialog.content_cls.ids.step_value.text)
+
         if not self.dialog:
             self.dialog = MDDialog(
-                text="Discard draft?",
+                type="custom",
+                content_cls=SliderConfig(min=self.ids.slider.min, max=self.ids.slider.max, step=self.ids.slider.step),
                 buttons=[
                     MDFlatButton(
                         text="CANCEL",
+                        on_press = close_dialog,
                     ),
                     MDFlatButton(
                         text="DISCARD",
+                        on_press = use_input,
                     ),
                 ],
             )
         self.dialog.open()
 
 
-class SliderWidget(MDBoxLayout):
-    pass
+class SliderConfig(MDBoxLayout):
+    def __init__(self, min, max, step, **kwargs):
+        super(SliderConfig, self).__init__(**kwargs)
+        self.ids.min_value.text = str(min)
+        self.ids.max_value.text = str(max)
+        self.ids.step_value.text = str(step)

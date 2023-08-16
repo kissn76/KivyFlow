@@ -7,13 +7,14 @@ from kivymd.uix.label import MDLabel, MDIcon
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.button import MDFlatButton
 from kivymd.uix.scrollview import MDScrollView
+from kivy.metrics import dp
 from kivy.lang import Builder
 
 
 Builder.load_file("kv/mainwindow.kv")
 
 
-class MainWindow(MDFloatLayout):
+class MainWindow(MDBoxLayout):
     Window.set_system_cursor('arrow')
 
 
@@ -92,7 +93,7 @@ class WidgetOutput(MDBoxLayout):
 class SliderWidget(MDBoxLayout):
     dialog = None
 
-    def show_alert_dialog(self):
+    def show_config_dialog(self):
 
         def close_dialog(obj):
             self.dialog.dismiss()
@@ -104,8 +105,10 @@ class SliderWidget(MDBoxLayout):
 
         if not self.dialog:
             self.dialog = MDDialog(
+                size_hint=[0.9, None],
+                title="Settings",
                 type="custom",
-                content_cls=SliderConfig(min=self.ids.slider.min, max=self.ids.slider.max, step=self.ids.slider.step),
+                content_cls=SliderWidgetConfig(min=self.ids.slider.min, max=self.ids.slider.max, step=self.ids.slider.step),
                 buttons=[
                     MDFlatButton(
                         text="CANCEL",
@@ -120,9 +123,9 @@ class SliderWidget(MDBoxLayout):
         self.dialog.open()
 
 
-class SliderConfig(MDBoxLayout):
+class SliderWidgetConfig(MDBoxLayout):
     def __init__(self, min, max, step, **kwargs):
-        super(SliderConfig, self).__init__(**kwargs)
+        super(SliderWidgetConfig, self).__init__(**kwargs)
         self.ids.min_value.text = str(min)
         self.ids.max_value.text = str(max)
         self.ids.step_value.text = str(step)

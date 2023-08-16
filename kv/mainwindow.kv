@@ -1,12 +1,38 @@
 #:kivy 2.2.1
 
 <MainWindow>:
-    WidgetContainer:
-        pos: (200, 100)
-    WidgetContainer:
-        pos: (0, 0)
-    WidgetContainer:
-        pos: (300, 200)
+    orientation: "horizontal"
+    MDLabel:
+        size_hint_x: None
+        size_hint_y: None
+        width: 100
+        height: 500
+        canvas.before:
+            Color:
+                rgba: 0, 1, 0, 0.5
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        text: "Widgets"
+    MDFloatLayout:
+        size_hint_x: None
+        size_hint_y: None
+        width: 1000
+        height: 500
+        pos: (300, 0)
+        canvas.before:
+            Color:
+                rgba: 1, 1, 0, 0.5
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        text: "Widgets"
+        WidgetContainer:
+            pos: (200, 100)
+        WidgetContainer:
+            pos: (0, 0)
+        WidgetContainer:
+            pos: (300, 200)
 
 <WidgetContainer>:
     orientation: "vertical"
@@ -61,6 +87,9 @@
 
 <WidgetOutput>:
     orientation: "horizontal"
+    size_hint_x: None
+    padding: 0
+    spacing: 0
     text: ""
     dialog: None
     canvas.before:
@@ -92,13 +121,15 @@
         hint: False
     MDIconButton:
         icon: "cogs"
-        on_release: root.show_alert_dialog()
+        on_release: root.show_config_dialog()
+        size_hint_x: None
     WidgetOutput
         id: value
 
-<SliderConfig>:
+<SliderWidgetConfig>:
     orientation: "vertical"
     size_hint_y: None
+    height: dp(200)
 
     MDTextField:
         id: min_value

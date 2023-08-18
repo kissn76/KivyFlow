@@ -1,0 +1,38 @@
+<SliderWidget>:
+    orientation: "horizontal"
+    MDSlider:
+        id: slider
+        canvas.before:
+            Color:
+                rgba: 0, 0, 1, 1
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        min: 0
+        max: 100
+        step: 0.1
+        on_value: value.text = str(self.value)
+        hint: False
+    MDIconButton:
+        icon: "cogs"
+        on_release: root.show_config_dialog()
+        size_hint_x: None
+    WidgetOutput
+        id: value
+
+<SliderWidgetConfig>:
+    orientation: "vertical"
+    size_hint_y: None
+    height: dp(200)
+
+    MDTextField:
+        id: min_value
+        hint_text: "Minimum value"
+
+    MDTextField:
+        id: max_value
+        hint_text: "Maximum value"
+
+    MDTextField:
+        id: step_value
+        hint_text: "Step"

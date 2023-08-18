@@ -1,0 +1,36 @@
+#:kivy 2.2.1
+
+<MainWindow>:
+    orientation: "horizontal"
+    MDLabel:
+        size_hint_x: None
+        size_hint_y: None
+        width: 100
+        height: 500
+        canvas.before:
+            Color:
+                rgba: 0, 1, 0, 0.5
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        text: "Widgets"
+    MDFloatLayout:
+        id: mainlayout
+        size_hint_x: None
+        size_hint_y: None
+        width: 1000
+        height: 500
+        pos: (300, 0)
+        canvas.before:
+            Color:
+                rgba: 1, 1, 0, 0.5
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        text: "Widgets"
+        WidgetContainer:
+            pos: (200, 100)
+        # WidgetContainer:
+        #     pos: (0, 0)
+        # WidgetContainer:
+        #     pos: (300, 200)

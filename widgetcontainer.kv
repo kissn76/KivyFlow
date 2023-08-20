@@ -1,9 +1,11 @@
+#:kivy 2.2.1
+
 <WidgetContainer>:
     orientation: "vertical"
     size_hint_x: None
     size_hint_y: None
     width: 300
-    drag_rectangle: self.x, self.y + self.height - self.titlebar_height, self.width - root.resize_border_width - root.middlewidget_width, self.titlebar_height
+    drag_rectangle: self.x, self.y + self.height - root.titlebar_height, self.width - root.resize_border_width - root.middlewidget_width, root.titlebar_height
     drag_timeout: 10000000
     drag_distance: 0
     MDBoxLayout:
@@ -27,9 +29,6 @@
             id: resizer
             width: root.resize_border_width
             height: root.titlebar_height
-    # SliderWidget
-    MDLabel:
-        text: "Próbapanel"
 
 <WidgetMover>:
     text: "Name"

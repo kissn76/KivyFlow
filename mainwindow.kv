@@ -14,6 +14,7 @@
                 size: self.size
                 pos: self.pos
         text: "Widgets"
+        on_touch_down: root.add_new_widget("dummy")
     MDFloatLayout:
         id: mainlayout
         size_hint_x: None
@@ -28,9 +29,3 @@
                 size: self.size
                 pos: self.pos
         text: "Widgets"
-        WidgetContainer:
-            pos: (200, 100)
-        # WidgetContainer:
-        #     pos: (0, 0)
-        # WidgetContainer:
-        #     pos: (300, 200)

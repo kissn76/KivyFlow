@@ -6,15 +6,15 @@ from kivy.lang import Builder
 from kivy.core.window import Window
 
 
-Builder.load_file("modules/default.kv")
+Builder.load_file("widgetcontainer.kv")
 
 
 class WidgetContainer(DragBehavior, MDBoxLayout):
     def __init__(self, **kwargs):
-        super(WidgetContainer, self).__init__(**kwargs)
         self.titlebar_height = 24
         self.middlewidget_width = 6
         self.resize_border_width = 6
+        super(WidgetContainer, self).__init__(**kwargs)
 
 
     def on_touch_down(self, touch):

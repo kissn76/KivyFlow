@@ -3,7 +3,7 @@ from kivymd.uix.button import MDFlatButton
 from kivymd.uix.dialog import MDDialog
 
 
-class SliderWidget(MDBoxLayout):
+class Plugin(MDBoxLayout):
     dialog = None
 
     def show_config_dialog(self):

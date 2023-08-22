@@ -15,7 +15,7 @@ class Module:
 
 
     def list_modules(self):
-        print(self.__modules)
+        return self.__modules
 
 
     def new_object(self, module_name):

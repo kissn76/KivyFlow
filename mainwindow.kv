@@ -2,30 +2,27 @@
 
 <MainWindow>:
     orientation: "horizontal"
-    MDLabel:
-        size_hint_x: None
-        size_hint_y: None
-        width: 100
-        height: 500
-        canvas.before:
-            Color:
-                rgba: 0, 1, 0, 0.5
-            Rectangle:
-                size: self.size
-                pos: self.pos
-        text: "Widgets"
-        on_touch_down: root.add_new_widget("dummy")
-    MDFloatLayout:
-        id: mainlayout
-        size_hint_x: None
-        size_hint_y: None
-        width: 1000
-        height: 500
-        pos: (300, 0)
+    MDScrollView:
         canvas.before:
             Color:
                 rgba: 1, 1, 0, 0.5
             Rectangle:
                 size: self.size
                 pos: self.pos
-        text: "Widgets"
+        MDFloatLayout:
+            id: mainlayout
+            # size_hint_x: None
+            # size_hint_y: None
+            # width: 2000
+            # height: 2000
+    MDStackLayout:
+        id: modulelist
+        orientation: "lr-tb"
+        size_hint_x: None
+        # width: 200
+        canvas.before:
+            Color:
+                rgba: 1, 0, 0, 0.5
+            Rectangle:
+                size: self.size
+                pos: self.pos

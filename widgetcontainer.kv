@@ -8,20 +8,31 @@
     drag_rectangle: self.x, self.y + self.height - root.titlebar_height, self.width - root.resize_border_width - root.middlewidget_width, root.titlebar_height
     drag_timeout: 10000000
     drag_distance: 0
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
     MDBoxLayout:
-        pos: (200, 200)
         orientation: "horizontal"
         size_hint_y: None
         height: root.titlebar_height
         WidgetMover:
             id: titlebar
             height: root.titlebar_height
+            canvas.before:
+                Color:
+                    rgba: 0.5, 0.5, 0.5, 1
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
         Widget:
             size_hint_x: None
             width: root.middlewidget_width
             canvas.before:
                 Color:
-                    rgba: 0, 1, 0, 0.5
+                    rgba: 0, 0, 0, 1
                 Rectangle:
                     size: self.size
                     pos: self.pos
@@ -29,27 +40,21 @@
             id: resizer
             width: root.resize_border_width
             height: root.titlebar_height
+            canvas.before:
+                Color:
+                    rgba: 0.8, 0.6, 0.4, 1
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
 
 <WidgetMover>:
     text: "Name"
     size_hint_y: None
-    canvas.before:
-        Color:
-            rgba: 0, 1, 0, 0.5
-        Rectangle:
-            size: self.size
-            pos: self.pos
 
 <WidgetResizer>:
     text: ""
     size_hint_y: None
     size_hint_x: None
-    canvas.before:
-        Color:
-            rgba: 0, 0, 0, 0.5
-        Rectangle:
-            size: self.size
-            pos: self.pos
 
 <WidgetOutput>:
     orientation: "horizontal"

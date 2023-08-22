@@ -3,26 +3,34 @@
 <MainWindow>:
     orientation: "horizontal"
     MDScrollView:
-        canvas.before:
-            Color:
-                rgba: 1, 1, 0, 0.5
-            Rectangle:
-                size: self.size
-                pos: self.pos
+        # canvas.before:
+        #     Color:
+        #         rgba: 1, 1, 0, 0.5
+        #     Rectangle:
+        #         size: self.size
+        #         pos: self.pos
         MDFloatLayout:
             id: mainlayout
+            md_bg_color: app.theme_cls.bg_light
             # size_hint_x: None
             # size_hint_y: None
             # width: 2000
             # height: 2000
+            MDLabel:
+                text: "Theme style - {}".format(app.theme_cls.theme_style)
+
+            MDRaisedButton:
+                text: "Set theme"
+                on_release: app.switch_theme_style()
     MDStackLayout:
         id: modulelist
         orientation: "lr-tb"
         size_hint_x: None
+        md_bg_color: app.theme_cls.bg_darkest
         # width: 200
-        canvas.before:
-            Color:
-                rgba: 1, 0, 0, 0.5
-            Rectangle:
-                size: self.size
-                pos: self.pos
+        # canvas.before:
+        #     Color:
+        #         rgba: 1, 0, 0, 0.5
+        #     Rectangle:
+        #         size: self.size
+        #         pos: self.pos

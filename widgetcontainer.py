@@ -1,7 +1,8 @@
 from kivy.uix.behaviors import DragBehavior
 from kivymd.uix.behaviors import HoverBehavior
 from kivymd.uix.boxlayout import MDBoxLayout
-from kivymd.uix.label import MDLabel
+from kivymd.uix.toolbar import MDTopAppBar
+from kivymd.uix.label import MDLabel, MDIcon
 from kivy.lang import Builder
 from kivy.core.window import Window
 
@@ -12,7 +13,6 @@ Builder.load_file("widgetcontainer.kv")
 class WidgetContainer(DragBehavior, MDBoxLayout):
     def __init__(self, **kwargs):
         self.titlebar_height = 24
-        self.middlewidget_width = 6
         self.resize_border_width = 6
         super(WidgetContainer, self).__init__(**kwargs)
 
@@ -23,8 +23,8 @@ class WidgetContainer(DragBehavior, MDBoxLayout):
 
         if touch.button == 'left':
             edit_type = 'pos'
-            xx, yy = self.to_widget(*touch.pos, relative=True)
-            if self.width - xx < self.resize_border_width and self.height - yy < self.titlebar_height:
+            xx, yy = self.to_widget(*touch.pos, relative=False)
+            if xx - self.ids.titlebar.ids.resizer.x > 0 and yy - self.ids.titlebar.ids.resizer.y > 0:
                 edit_type = 'right'
             touch.ud['edit_type'] = edit_type
 
@@ -58,17 +58,35 @@ class WidgetContainer(DragBehavior, MDBoxLayout):
                 self.size_hint_x = xx / self.parent.width
 
 
-class WidgetMover(HoverBehavior, MDLabel):
+class WidgetHeader(MDBoxLayout):
+    pass
+
+
+class WidgetHeaderMover(HoverBehavior, MDIcon):
+    def __init__(self, **kwargs):
+        super(WidgetHeaderMover, self).__init__(**kwargs)
+        self.icon = "arrow-all"
+        self.pos_hint = {"center_x": .5, "center_y": .5}
+
+
     def on_enter(self, *args):
         Window.set_system_cursor('crosshair')
+
 
     def on_leave(self, *args):
         Window.set_system_cursor('arrow')
 
 
-class WidgetResizer(HoverBehavior, MDLabel):
+class WidgetHeaderResizer(HoverBehavior, MDIcon):
+    def __init__(self, **kwargs):
+        super(WidgetHeaderResizer, self).__init__(**kwargs)
+        self.icon = "arrow-left-right"
+        self.pos_hint = {"center_x": .5, "center_y": .5}
+
+
     def on_enter(self, *args):
         Window.set_system_cursor('size_we')
+
 
     def on_leave(self, *args):
         Window.set_system_cursor('arrow')

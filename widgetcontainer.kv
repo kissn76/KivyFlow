@@ -5,56 +5,32 @@
     size_hint_x: None
     size_hint_y: None
     width: 300
-    drag_rectangle: self.x, self.y + self.height - root.titlebar_height, self.width - root.resize_border_width - root.middlewidget_width, root.titlebar_height
+    drag_rectangle: self.ids.titlebar.ids.mover.x, self.ids.titlebar.ids.mover.y, self.ids.titlebar.ids.mover.width, self.ids.titlebar.ids.mover.height
     drag_timeout: 10000000
     drag_distance: 0
-    canvas.before:
-        Color:
-            rgba: 1, 1, 1, 1
-        Rectangle:
-            size: self.size
-            pos: self.pos
-    MDBoxLayout:
-        orientation: "horizontal"
+    md_bg_color: app.theme_cls.bg_darkest
+    WidgetHeader:
+        id: titlebar
+        title: "Name"
         size_hint_y: None
-        height: root.titlebar_height
-        WidgetMover:
-            id: titlebar
-            height: root.titlebar_height
-            canvas.before:
-                Color:
-                    rgba: 0.5, 0.5, 0.5, 1
-                Rectangle:
-                    size: self.size
-                    pos: self.pos
-        Widget:
-            size_hint_x: None
-            width: root.middlewidget_width
-            canvas.before:
-                Color:
-                    rgba: 0, 0, 0, 1
-                Rectangle:
-                    size: self.size
-                    pos: self.pos
-        WidgetResizer:
-            id: resizer
-            width: root.resize_border_width
-            height: root.titlebar_height
-            canvas.before:
-                Color:
-                    rgba: 0.8, 0.6, 0.4, 1
-                Rectangle:
-                    size: self.size
-                    pos: self.pos
+        height: 24
 
-<WidgetMover>:
-    text: "Name"
-    size_hint_y: None
-
-<WidgetResizer>:
-    text: ""
-    size_hint_y: None
-    size_hint_x: None
+<WidgetHeader>:
+    orientation: "horizontal"
+    title: "Title"
+    md_bg_color: app.theme_cls.primary_color
+    WidgetHeaderMover:
+        id: mover
+    MDLabel:
+        text: root.title
+        canvas.before:
+            Color:
+                rgba: 0.1, 0.1, 0.1, 0.5
+            Rectangle:
+                size: self.size
+                pos: self.pos
+    WidgetHeaderResizer:
+        id: resizer
 
 <WidgetOutput>:
     orientation: "horizontal"
@@ -63,12 +39,12 @@
     spacing: 0
     text: ""
     dialog: None
-    canvas.before:
-        Color:
-            rgba: 1, 0, 0, 1
-        Rectangle:
-            size: self.size
-            pos: self.pos
+    # canvas.before:
+    #     Color:
+    #         rgba: 1, 0, 0, 1
+    #     Rectangle:
+    #         size: self.size
+    #         pos: self.pos
     MDLabel:
         text: root.text
     MDIcon:

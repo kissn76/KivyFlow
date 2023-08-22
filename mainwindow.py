@@ -1,6 +1,6 @@
 from kivy.core.window import Window
 from kivymd.uix.boxlayout import MDBoxLayout
-from kivymd.uix.button import MDRaisedButton
+from kivymd.uix.button import MDRectangleFlatButton
 from kivy.lang import Builder
 from widgetcontainer import *
 from module import Module
@@ -20,12 +20,13 @@ class MainWindow(MDBoxLayout):
 
 
     def add_new_widget(self, module_name):
-        self.wc = WidgetContainer(pos=(0, 0))
-        self.ids.mainlayout.add_widget(self.wc)
-        self.wc.add_widget(self.module.new_object(module_name=module_name))
+        wc = None
+        wc = WidgetContainer(pos=(100, 200))
+        self.ids.mainlayout.add_widget(wc)
+        wc.add_widget(self.module.new_object(module_name=module_name))
 
 
     def add_module(self, module_name):
-        rb = MDRaisedButton(text=module_name)
+        rb = MDRectangleFlatButton(text=module_name)
         rb.bind(on_press=lambda x: self.add_new_widget(module_name))
         self.ids.modulelist.add_widget(rb)

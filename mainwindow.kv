@@ -1,6 +1,7 @@
 #:kivy 2.2.1
 
 <MainWindow>:
+    id: mainwindow
     orientation: "horizontal"
     MDScrollView:
         # canvas.before:
@@ -16,8 +17,8 @@
             # size_hint_y: None
             # width: 2000
             # height: 2000
-            MDLabel:
-                text: "Theme style - {}".format(app.theme_cls.theme_style)
+            # MDLabel:
+            #     text: "Theme style - {}".format(app.theme_cls.theme_style)
 
             MDRaisedButton:
                 text: "Set theme"
@@ -34,3 +35,12 @@
         #     Rectangle:
         #         size: self.size
         #         pos: self.pos
+
+<ModuleLine>:
+    orientation: "horizontal"
+    size_hint_y: None
+    md_bg_color: app.theme_cls.bg_light
+    text: ""
+    MDLabel:
+        text: root.text
+        size_hint_y: None

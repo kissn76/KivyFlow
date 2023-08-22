@@ -23,8 +23,7 @@ class WidgetContainer(DragBehavior, MDBoxLayout):
 
         if touch.button == 'left':
             edit_type = 'pos'
-            xx, yy = self.to_widget(*touch.pos, relative=False)
-            if xx - self.ids.titlebar.ids.resizer.x > 0 and yy - self.ids.titlebar.ids.resizer.y > 0:
+            if self.ids.titlebar.ids.resizer.collide_point(*touch.pos):
                 edit_type = 'right'
             touch.ud['edit_type'] = edit_type
 

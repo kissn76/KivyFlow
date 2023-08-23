@@ -24,12 +24,14 @@ class MainWindow(MDBoxLayout):
         wc = None
         wc = WidgetContainer(pos=pos)
         self.ids.mainlayout.add_widget(wc)
-        wc.add_widget(self.module.new_object(module_name=module_name))
+        self.insert_widget(wc, module_name)
+
+
+    def insert_widget(self, widget_container, module_name):
+        widget_container.add_widget(self.module.new_object(module_name=module_name))
 
 
     def add_module(self, module_name):
-        # rb = MDRectangleFlatButton(text=module_name)
-        # rb.bind(on_press=lambda x: self.add_new_widget(module_name))
         self.ids.modulelist.add_widget(ModuleLine(module_name))
 
 
@@ -65,9 +67,9 @@ class ModuleLine(MDBoxLayout):
         if 'add_node' in touch.ud.keys():
             if touch.ud['add_node'] == self:
                 app = App.get_running_app()
-                for widget in app.root.ids.mainlayout.children:
-                    if widget.collide_point(*touch.pos):
-                        print(self.text, widget)
+                for widget_container in app.root.ids.mainlayout.children:
+                    if widget_container.collide_point(*touch.pos):
+                        app.root.insert_widget(widget_container, self.text)
                         return super(ModuleLine, self).on_touch_up(touch)
 
                 if app.root.ids.mainlayout.collide_point(*touch.pos):

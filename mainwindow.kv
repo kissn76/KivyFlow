@@ -3,7 +3,10 @@
 <MainWindow>:
     id: mainwindow
     orientation: "horizontal"
-    MDScrollView:
+    Scatter:
+        do_rotation: False
+        # do_scale: False
+        # do_translation_y: False
         # canvas.before:
         #     Color:
         #         rgba: 1, 1, 0, 0.5
@@ -19,10 +22,15 @@
             # height: 2000
             # MDLabel:
             #     text: "Theme style - {}".format(app.theme_cls.theme_style)
-
-            MDRaisedButton:
-                text: "Set theme"
-                on_release: app.switch_theme_style()
+            MDBoxLayout:
+                # MDRaisedButton:
+                #     text: "Set theme"
+                #     on_release: app.switch_theme_style()
+                # MDRaisedButton:
+                #     text: "Set theme"
+                #     on_release: app.switch_theme_style()
+                MDLabel:
+                    text: "Lorem ipsum"
     MDStackLayout:
         id: modulelist
         orientation: "lr-tb"
